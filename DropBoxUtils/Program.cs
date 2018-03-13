@@ -13,7 +13,7 @@ namespace DropBoxUtils
             try
             {
                 var currentUser = WindowsIdentity.GetCurrent().Name;
-                Console.WriteLine("Running as {0}", currentUser);
+                Console.WriteLine("Running as user '{0}'", currentUser);
                 var folder = ConfigurationManager.AppSettings["DropBoxSystemVolPath"];
                 if (Directory.Exists(folder))
                 {
@@ -29,15 +29,14 @@ namespace DropBoxUtils
                     UnmanagedCode.GiveRestorePrivilege();
                     directorySecurity.SetOwner(owner);
                     directory.SetAccessControl(directorySecurity);
-                    Console.WriteLine("Deleting path: {0}", folder);
+                    Console.WriteLine("Deleting path '{0}'", folder);
                     Directory.Delete(folder, true);
                     Console.WriteLine("Done.");
                 }
                 else
                 {
-                    Console.WriteLine("Could not find path: {0}", folder);
+                    Console.WriteLine("Could not find path '{0}'", folder);
                 }
-                Console.WriteLine(Directory.Exists(folder));
             }
             catch (Exception exc)
             {
